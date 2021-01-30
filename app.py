@@ -208,6 +208,4 @@ def visitors():
 
 
 if __name__ == "__main__":
-    app.debug = True
-    app.templates_auto_reload = True
     app.run()
