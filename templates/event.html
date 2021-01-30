@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ data["title"]}}{% endblock %}
+
+{% block body %}
+    <div id="event"  class="container">
+        <h1 class="text-center">
+            {{ data["title"]}}
+            {% if data['end'] %}
+                <i class="fw-light">(Terminé)</i>
+            {% endif %}
+        </h1>
+        <div class="row mt-3">
+            <div class="col-md text-center">
+                Début: <b>{{ data['date'] }}</b>
+            </div>
+            <div class="col-md text-center">
+                Fin:
+                {% if data['end'] %}
+                    <b>{{ data['end'] }}</b>
+                {% else %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row mt-5">
+            {% if data['end'] %}
+            {% else %}
+            <div class="col event-card p-4">
+                <h3 class="pt-3">Nouveau Visiteur</h3>
+                <form id="event-form" class="px-2 mt-5" action="/create/visitor" method="POST">
+                    <div class="form-group mb-3">
+                        <label for="visitor-name">Prénom/Nom:</label>
+                        <input required type="text" class="form-control" id="visitor-name" name="visitor-name" placeholder="Prénom/Nom:">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="visitor-funcao">Fonction ministérielle:</label>
+                        <input  type="text" class="form-control" id="visitor-funcao" name="visitor-funcao" placeholder="Fonction ministérielle (Optionel)">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="visitor-cargo">Fonction dans l'Église:</label>
+                        <input type="text" class="form-control" id="visitor-cargo" name="visitor-cargo" placeholder="Fonction dans l'Église (Optionel)">
+                        <input type="text" name="id" value="{{ '%s'%data['id'] }}" hidden>
+                    </div>
+                    <button type="submit" class="btn btn-primary" >Créer</button>
+
+                </form>
+            </div>
+            {% endif %}
+            <div class="col event-card p-4 mx-auto" style="max-width: 500px;">
+                <h3 class="pt-3">Visiteurs</h3>
+                {% if visitors %}
+                <ul class="list-group list-group-flush" style="height: 390px; overflow-y: auto;">
+                    {% for visitor in visitors %}
+                    <li class="list-group-item bg-transparent d-flex">
+                        <div style="width: 85%;">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="fw-bolder">{{ visitor['function'] }} {{ visitor['name'] }}</h5>
+                                <div>{{ visitor['hour'] }}</div>
+                            </div>
+                            <div class="fw-light fst-italic">
+                                Fonction dans l'Église:
+                                <span class="fw-bold fst-normal">{{ visitor['cargo'] }}</span>
+                            </div>
+                        </div>
+                        <div style="margin-left: 15px;">
+                            <a href="{{ '/delete/visitor/%s/%s'%(visitor['id'],data['id']) }}">
+                                <button type="button" class="btn btn-danger mt-2">
+                                    <i class="gg-trash"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                    <div class="text-secondary mt-5 text-center">Il n'y a pas de visiteurs</div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if data['end'] %}
+        {% else %}
+        <div class="mt-4 text-center float-center">
+            <a href="{{ '/manage/end/%s'%data['id'] }}">
+                <button class="btn btn-danger">Terminer Évènement</button>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

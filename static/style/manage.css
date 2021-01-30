@@ -1,0 +1,29 @@
+.alignX {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+#manage-container .manage-block {
+  background-color: #e2e2e2;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#manage-container .manage-block .manage-block-row {
+  padding: 15px;
+}
+
+#manage-container .manage-block .manage-block-row .manage-block-title {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 30px;
+  height: 38px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/*# sourceMappingURL=manage.css.map */

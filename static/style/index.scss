@@ -1,0 +1,39 @@
+#navbar{
+    #navbar-logo{
+        height: 60px;
+        @media screen and (max-width: 400px){
+            height: 40px;
+        }
+    }
+    #navbar-title{
+        font-size: 18px;
+        @media screen and (max-width: 400px){
+            font-size: 11px;
+        }
+        font-weight: bolder;
+    }
+}
+
+
+#index-container{
+    .index-col{
+        
+        #index-col-div{
+            background-color:rgb(247, 247, 247);
+            margin: 20px;
+            padding: 10px;
+            min-height: 500px;
+            border-radius: 20px;
+            border: 1px solid rgb(107, 107, 107);
+        }
+    }
+    #index-form-1{
+        button{
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 180px;
+            border-radius: 10px;
+        }
+    }
+}

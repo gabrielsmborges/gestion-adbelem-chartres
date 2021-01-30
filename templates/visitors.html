@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Visiteurs{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if visitors %}
+            <ul class="list-group list-group-flush" >
+                {% for visitor in visitors %}
+                <li class="list-group-item bg-transparent py-4">                            
+                    <div class="d-flex justify-content-between">
+                        <h5 class="fw-bolder">{{ visitor['function'] }} {{ visitor['name'] }}</h5>
+                        <div>{{ visitor['hour'] }}</div>
+                    </div>
+                    <div class="fw-light fst-italic">
+                        Fonction dans l'Église:
+                        <span class="fw-bold fst-normal">{{ visitor['cargo'] }}</span>
+                    </div>
+                    <div class="fw-normal">
+                        <a href="{{ '/manage/%s'%visitor['eventId'] }}">{{ visitor['eventName'] }}</a>
+                    </div>
+                </li>
+                    {% endfor %}
+            </ul>
+        {% else %}
+            <div class="text-secondary mt-5 text-center">Aucun visiteur pour le moment</div>
+        {% endif %}
+    </div>
+{% endblock %}

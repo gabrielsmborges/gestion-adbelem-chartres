@@ -1,0 +1,19 @@
+#event{
+    .event-card{
+        background-color: #f7f7f7;
+        margin: 0 15px;
+        min-height: 500px;
+        border-radius: 20px;
+        border: 1px solid #6b6b6b;
+    }
+
+    #event-form{
+        button{
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 180px;
+            border-radius: 10px;
+        }
+    }
+}

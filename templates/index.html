@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Gestion AdBelem Chartres{% endblock %}
+
+{% block body %}
+    
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+        </div>
+    {% endif %}
+
+    <div id="index-container" class="container">
+        <div class="row">
+            {% if currentEvent %}
+            <div class="col-md index-col">
+                <div id="index-col-div" class="p-4">
+                    <h3 class="text-center">Réunion en cours</h3>
+                    <div class="text-center mt-4">
+                        <h5 style="font-size: 40px;" class="fw-light">{{ (currentEvent['name']|replace(',', ""))|replace("'", "")|replace("(", "")|replace(")", "") }}</h5>
+                        <div style="font-size: 80px;">{{ count }}</div>
+                        <div style="font-size: 30px;">Visiteurs</div>
+                        <a href="{{ '/manage/%s'%currentEvent['eventId'] }}">
+                            <button class="btn btn-success mt-5">Voir</button>
+                        </a>
+                        <a href="{{ '/end/home/%s'%currentEvent['eventId'] }}">
+                            <button class="btn btn-danger mt-5">Mettre Fin</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-md index-col">
+                <div id="index-col-div" class="p-4">
+                    <h3 class="text-center">Créer une Nouvelle Réunion</h3>
+                    <form id="index-form-1" class="px-2 mt-5" action="/create/event" method="POST">
+                        <div class="form-group mb-3">
+                            <label for="create-title">Titre:</label>
+                            <input required type="text" class="form-control" id="create-title" name="create-title" placeholder="Titre">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="create-date">Date:</label>
+                            <input required type="date" class="form-control" id="create-date" name="create-date"  placeholder="Date">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="create-hour">Heure:</label>
+                            <input required type="time" class="form-control" id="create-hour" name="create-hour"  placeholder="Heure">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Créer</button>
+
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="col-md index-col">
+                <div id="index-col-div" class="p-4">
+                    <h3 class="text-center">Derniers Visiteurs</h3>
+                    {% if visitors %}
+                    <ul class="list-group list-group-flush" style="height: 390px; overflow-y: auto;">
+                        {% for visitor in visitors %}
+                        <li class="list-group-item bg-transparent">                            
+                            <div class="d-flex justify-content-between">
+                                <h5 class="fw-bolder">{{ visitor['function'] }} {{ visitor['name'] }}</h5>
+                                <div>{{ visitor['hour'] }}</div>
+                            </div>
+                            <div class="fw-light fst-italic">
+                                Fonction dans l'Église:
+                                <span class="fw-bold fst-normal">{{ visitor['cargo'] }}</span>
+                            </div>
+                            <div class="fw-normal">
+                                {{ visitor['eventName'] }}
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <div class="text-secondary mt-5 text-center">Aucun visiteur pour le moment</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../static/js/index.js"></script>
+{% endblock %}

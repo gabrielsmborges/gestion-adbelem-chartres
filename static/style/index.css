@@ -1,0 +1,39 @@
+#navbar #navbar-logo {
+  height: 60px;
+}
+
+@media screen and (max-width: 400px) {
+  #navbar #navbar-logo {
+    height: 40px;
+  }
+}
+
+#navbar #navbar-title {
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+@media screen and (max-width: 400px) {
+  #navbar #navbar-title {
+    font-size: 11px;
+  }
+}
+
+#index-container .index-col #index-col-div {
+  background-color: #f7f7f7;
+  margin: 20px;
+  padding: 10px;
+  min-height: 500px;
+  border-radius: 20px;
+  border: 1px solid #6b6b6b;
+}
+
+#index-container #index-form-1 button {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  min-width: 180px;
+  border-radius: 10px;
+}
+/*# sourceMappingURL=index.css.map */

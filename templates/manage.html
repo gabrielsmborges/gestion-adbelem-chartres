@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Gérer{% endblock %}
+
+{% block body %}
+    <div id="manage-container" class="container">
+        {% if data %}
+            <div class="row mx-3 pb-3">
+                <div class="col">
+                    <div class="text-secondary">Titre</div>
+                </div>
+                <div class="col">
+                    <div class="text-center text-secondary">Situation</div>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+            {% for el in data %}
+            <div class="row">
+                <div class="col mb-3">
+                    <div class="manage-block">
+                        <div class="row manage-block-row">
+                            <div class="col-4">
+                                <div class="manage-block-title">{{ el["title"] }}</div>
+                            </div>
+                            <div class="col-4">
+                                {% if el["end"] %}
+                                    <div class="text-danger text-center my-auto alignX">Terminé</div>
+                                {% else %}
+                                    <div class="text-success text-center my-auto alignX">En cours</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-4">
+                                <div class="text-success text-end my-auto alignX">
+                                    
+                                    <a href="{{ '/manage/%s'%el['id'] }}">
+                                        <button type="button" class="btn btn-success">Voir</button>
+                                    </a>
+                                    {% if el["end"] %}
+                                    {% else %}
+                                        <a href="{{ '/end/%s'%el['id'] }}"><button type="button" class="btn btn-primary">Mettre Fin</button></a>
+                                    {% endif %}
+                                    <a href="{{ '/delete/%s'%el['id'] }}"><button type="button" class="btn btn-danger float-right">Supprimer</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="row mx-3 pb-3">
+                <div class="col">
+                    <div class="text-center text-secondary">Aucun Évènement pour l'instant</div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+
+{% endblock %}
